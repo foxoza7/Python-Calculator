@@ -1,5 +1,6 @@
-# Entorno virtual
 venv/
+Scripts/
+pyvenv.cfg
 __pycache__/
 *.pyc
 .vscode/
