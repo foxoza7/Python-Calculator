@@ -49,3 +49,15 @@ Next improvements:
 ```text
 Keyboard support, unit tests and executable packaging.
 ```
+
+### 4. Run the calculator
+
+If your files are inside the `src` folder, first go into that folder:
+
+```bash
+cd src
+```
+python main.py
+```
+python3 main.py
+---
