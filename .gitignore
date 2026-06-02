@@ -1,6 +1,5 @@
 # Entorno virtual
 venv/
-Calculator/
 __pycache__/
 *.pyc
 .vscode/
