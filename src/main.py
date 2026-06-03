@@ -2,22 +2,38 @@ import os
 import tkinter as tk
 from calculator_ui import CalculatorApp
 
+def calculadora_consola():
+    """
+    Toda la lógica de tu calculadora en modo texto (CLI).
+    Esta función se encarga de pedir datos y mostrar resultados.
+    """
+    print("\n--- CALCULADORA MODO TEXTO ---")
+    try:
+        num1 = float(input("Escribe el primer número: "))
+        op = input("Escribe la operación (+, -, *, /): ")
+        num2 = float(input("Escribe el segundo número: "))
+        
+        if op == '+': res = num1 + num2
+        elif op == '-': res = num1 - num2
+        elif op == '*': res = num1 * num2
+        elif op == '/': res = num1 / num2 if num2 != 0 else "Error: División por 0"
+        else: res = "Operación no válida"
+        
+        print(f"Resultado: {res}\n")
+    except ValueError:
+        print("Error: Por favor, ingresa solo números válidos.")
+
 def main():
-    # VERIFICACIÓN INTELIGENTE:
-    # Si la variable de entorno 'DISPLAY' está vacía, estamos en Docker/Servidor
+    """
+    Esta es tu función 'Traffic Cop'.
+    Decide qué camino tomar basándose en el entorno.
+    """
+    # Verificamos si estamos en un entorno con pantalla
     if os.environ.get('DISPLAY') is None:
-        print("--- MODO SERVIDOR/DOCKER DETECTADO ---")
-        print("La interfaz gráfica no puede abrirse.")
-        print("Ejecutando lógica de calculadora en modo texto...")
-        
-        # AQUÍ DEBES LLAMAR A TU LÓGICA DE CÁLCULO
-        # Ejemplo: calculadora_consola() 
-        # (Si no tienes una, solo imprime un mensaje por ahora)
-        print("Resultado: El contenedor está vivo pero la GUI está desactivada.")
-        
+        # Estamos en Docker (o un servidor)
+        calculadora_consola()
     else:
-        # MODO ESCRITORIO NORMAL
-        print("--- MODO ESCRITORIO DETECTADO ---")
+        # Estamos en Windows/Escritorio
         root = tk.Tk()
         CalculatorApp(root)
         root.mainloop()
