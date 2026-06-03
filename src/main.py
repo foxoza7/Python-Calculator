@@ -1,30 +1,26 @@
-# main.py
-
-"""
-Archivo principal de la aplicación.
-
-Este archivo se encarga de iniciar la calculadora.
-La interfaz y la lógica están separadas en otros archivos
-para mantener el proyecto más limpio y profesional.
-"""
-
 import os
 import tkinter as tk
+from calculator_ui import CalculatorApp
 
 def main():
-    # Si estamos en Docker (o en un entorno sin pantalla), no inicies la GUI
+    # VERIFICACIÓN INTELIGENTE:
+    # Si la variable de entorno 'DISPLAY' está vacía, estamos en Docker/Servidor
     if os.environ.get('DISPLAY') is None:
-        print("Modo Servidor detectado: Ejecutando en modo texto...")
-        # Aquí llamarías a una función de consola en lugar de la GUI
-        calculadora_consola()
+        print("--- MODO SERVIDOR/DOCKER DETECTADO ---")
+        print("La interfaz gráfica no puede abrirse.")
+        print("Ejecutando lógica de calculadora en modo texto...")
+        
+        # AQUÍ DEBES LLAMAR A TU LÓGICA DE CÁLCULO
+        # Ejemplo: calculadora_consola() 
+        # (Si no tienes una, solo imprime un mensaje por ahora)
+        print("Resultado: El contenedor está vivo pero la GUI está desactivada.")
+        
     else:
-        print("Modo Escritorio detectado: Abriendo GUI...")
+        # MODO ESCRITORIO NORMAL
+        print("--- MODO ESCRITORIO DETECTADO ---")
         root = tk.Tk()
-        # ... resto de tu código GUI
+        CalculatorApp(root)
         root.mainloop()
 
-# Debes crear esta función que solo usa print e input
-def calculadora_consola():
-    num1 = float(input("Número 1: "))
-    # ... lógica de suma
-    print(f"Resultado: {resultado}")
+if __name__ == "__main__":
+    main()
