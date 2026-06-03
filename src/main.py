@@ -8,35 +8,23 @@ La interfaz y la lógica están separadas en otros archivos
 para mantener el proyecto más limpio y profesional.
 """
 
-# Importamos tkinter para crear la ventana principal
+import os
 import tkinter as tk
 
-# Importamos la clase que contiene toda la interfaz gráfica
-from calculator_ui import CalculatorApp
-
-
 def main():
-    """
-    Función principal del programa.
+    # Si estamos en Docker (o en un entorno sin pantalla), no inicies la GUI
+    if os.environ.get('DISPLAY') is None:
+        print("Modo Servidor detectado: Ejecutando en modo texto...")
+        # Aquí llamarías a una función de consola en lugar de la GUI
+        calculadora_consola()
+    else:
+        print("Modo Escritorio detectado: Abriendo GUI...")
+        root = tk.Tk()
+        # ... resto de tu código GUI
+        root.mainloop()
 
-    Buena práctica:
-    Usar una función main() ayuda a que el código sea más organizado
-    y evita que todo se ejecute directamente al importar el archivo.
-    """
-
-    # Creamos la ventana principal de la aplicación
-    root = tk.Tk()
-
-    # Creamos la aplicación de calculadora y le pasamos la ventana principal
-    CalculatorApp(root)
-
-    # Iniciamos el ciclo principal de Tkinter
-    # Esto mantiene la ventana abierta esperando acciones del usuario
-    root.mainloop()
-
-
-# Buena práctica:
-# Esta condición permite que el programa solo se ejecute
-# cuando corremos directamente este archivo.
-if __name__ == "__main__":
-    main()
+# Debes crear esta función que solo usa print e input
+def calculadora_consola():
+    num1 = float(input("Número 1: "))
+    # ... lógica de suma
+    print(f"Resultado: {resultado}")
